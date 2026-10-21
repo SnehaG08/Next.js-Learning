@@ -1,26 +1,612 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italianno&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
 @import "tailwindcss";
+@import "../styles/login.css";
+@import "../styles/home.css";
+@import "../styles/about.css";
+@import "../styles/contact.css";
+@import "../styles/myarticles.css";
+@import "../styles/admin-dashboard.css";
+@plugin "daisyui";
+
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* =========================
+     COLORS
+  ========================= */
+
+  --background: #16171D;
+  --surface: #1C1E25;
+  --surface-bright: #22252D;
+
+  --foreground: #F5F5F5;
+  --white: #FFFFFF;
+  --navy: #16171D;
+
+  --green: #2A744E;
+  --green-secondary: #059669;
+
+  --muted: #A3A5AA;
+  --subtle: #73767D;
+
+  --border: #3A3D45;
+  --border-light: #4A4D55;
+
+  --inverse: #16171D;
+
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+--font-display: "Oswald", sans-serif;
+--font-body: "DM Sans", sans-serif;
+--font-script: "Italianno", cursive;
+
+
+  /* =========================
+     RADIUS
+  ========================= */
+
+  --radius-container: 26px;
+  --radius-card: 20px;
+  --radius-nav: 28px;
+  --radius-pill: 9999px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+
+button {
+  cursor: pointer;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+
+/* =========================
+   COMMON UI
+========================= */
+
+.ui-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   DAISYUI OVERRIDES
+========================= */
+
+.btn {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-pill);
+}
+
+.card {
+  border-radius: var(--radius-card);
+}
+
+.badge {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================
+   PAGE CONTAINER
+========================= */
+
+.page-container {
+  width: 100%;
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+
+/* =========================
+   PRIMARY BUTTON
+========================= */
+
+.btn-primary-custom {
+  min-height: 56px;
+  padding: 0 36px;
+
+  border: 1px solid var(--green);
+  border-radius: var(--radius-pill);
+
+  background-color: var(--green);
+  color: var(--white);
+
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition: all 0.25s ease;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--green-secondary);
+  border-color: var(--green-secondary);
+}
+
+
+/* =========================
+   SECONDARY BUTTON
+========================= */
+
+.btn-secondary-custom {
+  min-height: 56px;
+  padding: 0 36px;
+
+  border: 1px solid var(--green);
+  border-radius: var(--radius-pill);
+
+  background-color: transparent;
+  color: var(--foreground);
+
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition: all 0.25s ease;
+}
+
+.btn-secondary-custom:hover {
+  background-color: var(--green);
+  color: var(--white);
+}
+
+
+/* =========================
+   PAGE HEADING
+========================= */
+
+.page-heading {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1024px) {
+  .page-container {
+    padding: 0 32px;
+  }
+
+  .page-heading {
+    font-size: 3.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 0 20px;
+  }
+
+  .page-heading {
+    font-size: 3rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .page-heading {
+    font-size: 2.5rem;
+  }
+}
+
+.navbar-start{
+  padding: 3px;
+}
+
+
+/* =========================
+   FOOTER CONTAINER
+========================= */
+
+.profile-footer {
+  width: 80%;
+
+  margin: 25px auto 0;
+  padding: 30px 35px 15px;
+
+  border: 1px solid rgba(170, 176, 184, 0.25);
+  border-radius: 28px;
+
+  background: rgba(30, 35, 43, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: var(--white);
+}
+
+
+/* =========================
+   FOOTER MAIN CONTENT
+========================= */
+
+.profile-footer-content {
+  display: grid;
+
+  grid-template-columns: 1.5fr 0.7fr 0.7fr 1fr;
+  column-gap: 20px;
+
+  min-height: 205px;
+
+  align-items: start;
+  justify-content: center;
+}
+
+
+/* =========================
+   BRAND
+========================= */
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  text-align: left;
+}
+
+
+.footer-logo {
+  margin: 0 0 7px;
+
+  color: var(--white);
+
+  font-family: var(--font-script);
+  font-size: 4rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+
+.footer-description {
+  margin: 8px 0 12px;
+
+  color: var(--white);
+
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.45;
+
+  text-align: left;
+}
+
+
+/* =========================
+   SOCIAL ICONS
+========================= */
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 18px;
+
+  margin: 3px 0 14px;
+}
+
+
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--green);
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.footer-socials a:hover {
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   FOOTER TAGS
+========================= */
+
+.footer-tags {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 7px;
+}
+
+
+.footer-tags span {
+  padding: 5px 12px;
+
+  border: 1px solid var(--green);
+  border-radius: var(--radius-pill);
+
+  color: var(--white);
+
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================
+   FOOTER COLUMNS
+========================= */
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 6px;
+
+  text-align: left;
+}
+
+
+.footer-title {
+  margin: 2px 0 9px;
+
+  color: var(--green);
+
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+.footer-column a {
+  color: var(--white);
+
+  font-family: var(--font-body);
+  font-size: 1rem;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+
+.footer-column a:hover {
+  color: var(--green);
+}
+
+
+/* =========================
+   NEWSLETTER
+========================= */
+
+.footer-newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  text-align: left;
+}
+
+
+.footer-newsletter p {
+  margin: 0 0 12px;
+
+  color: var(--white);
+
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   NEWSLETTER INPUT
+========================= */
+
+.footer-newsletter input {
+  width: 100%;
+  height: 35px;
+
+  padding: 0 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background-color: transparent;
+  color: var(--white);
+
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+
+  outline: none;
+}
+
+
+.footer-newsletter input::placeholder {
+  color: var(--muted);
+}
+
+
+.footer-newsletter input:focus {
+  border-color: var(--green);
+}
+
+
+/* =========================
+   SUBSCRIBE BUTTON
+========================= */
+
+.footer-newsletter button {
+  margin-top: 9px;
+  padding: 8px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--green);
+  color: var(--white);
+
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+
+.footer-newsletter button:hover {
+  background-color: #2f8158;
+}
+
+
+.footer-newsletter button:active {
+  transform: scale(0.95);
+}
+
+
+/* =========================
+   COPYRIGHT
+========================= */
+
+.footer-copyright {
+  margin-top: 15px;
+  padding-top: 10px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+
+  text-align: center;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .profile-footer-content {
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 20px;
+    row-gap: 25px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .profile-footer {
+    padding: 30px 24px 15px;
+  }
+
+
+  .profile-footer-content {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+
+
+  .footer-newsletter input {
+    max-width: 100%;
+  }
+
 }
